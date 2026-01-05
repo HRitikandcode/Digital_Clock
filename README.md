@@ -50,3 +50,6 @@ The provided testbench (Clock_tb.v) is designed for fast verification.
 Parameter Overriding: The CLK_FRQ is overridden to 10 in the testbench. Without this, you would have to simulate 100,000,000 cycles just to see the second register change.
 
 Test Sequence: The testbench sets the time to 12:59:55 via the Edit mode, enters Run mode, and observes the double-rollover into a new hour.
+
+<img width="1920" height="1080" alt="Screenshot (1798)" src="https://github.com/user-attachments/assets/099a2d9e-d78e-4f0c-9c36-f0373e99bc71" />
+
