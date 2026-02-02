@@ -1,17 +1,21 @@
+//usede clock frequency is 100MHz
 module Clock #(parameter CLK_FRQ = 100000000)(
     input clk,
     input rst,
     input start,
     input stop,
     input edit,
+    
     // Edit values from user
-    input [5:0] e_sec,
+    //input [5:0] e_sec,
     input [5:0] e_minute,
     input [4:0] e_hour,
+    
     // Output for time 
     output reg [5:0] second,
     output reg [5:0] minute,
     output reg [4:0] hour,
+    
     // Output for current state 
     output idle_mode, 
     output run_mode, 
@@ -41,12 +45,15 @@ module Clock #(parameter CLK_FRQ = 100000000)(
         end
         else begin
             case(state)
+
+                //for ideal state count = 0
                 idle_state: begin
                     count <= 0;
                     if(start) state <= run_state;
                     else if(edit) state <= edit_state;
                 end
-                 
+
+                //this is run state where clock is run till we give another input
                 run_state: begin
                     if(stop) state <= stop_state;
                     else if(edit) state <= edit_state;
@@ -59,17 +66,18 @@ module Clock #(parameter CLK_FRQ = 100000000)(
                                     minute <= 0;
                                     if(hour == 12) hour <= 1; // Standard 12-hour clock behavior
                                     else hour <= hour + 1;
-                                end
+                                 end
                                 else minute <= minute + 1;
-                            end
+                             end
                             else second <= second + 1;
-                        end
+                         end
                         else count <= count + 1;
-                    end
-                end
-                  
+                     end
+                 end
+
+                
                 edit_state: begin
-                    second <= e_sec;
+                    //second <= e_sec;
                     minute <= e_minute;
                     hour   <= e_hour;
                     
